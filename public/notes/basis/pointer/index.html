@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="When working with variables, we must understand first of all what is a variable. In the RAM, we got an space of, lets say for example 8 GB, this means we have a capacity to store about 8 Billions bytes, but, what would &lsquo;storing bytes&rsquo; mean? In case the ram is such as a list, when we create a variable, what we are doing is getting some free position on the ram and simply using them for that variable. Let&rsquo;s say the following C code:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/notes/basis/pointer/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="My New Hugo Site">
+  <meta property="og:description" content="When working with variables, we must understand first of all what is a variable. In the RAM, we got an space of, lets say for example 8 GB, this means we have a capacity to store about 8 Billions bytes, but, what would ‘storing bytes’ mean? In case the ram is such as a list, when we create a variable, what we are doing is getting some free position on the ram and simply using them for that variable. Let’s say the following C code:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="notes">
+<title>Pointer | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/notes/basis/pointer/">
+<link rel="stylesheet" href="/book.min.1a2cf7ebc00040820952c4e2341e71d7d5b60d173ee3438ff388e77e880de9df.css" integrity="sha256-Giz368AAQIIJUsTiNB5x19W2DRc&#43;40OP84jnfogN6d8=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.67e33560f484200bd7322deb340ca99efcd4b1b1930fd430a7c5b86139554f3d.js" integrity="sha256-Z&#43;M1YPSEIAvXMi3rNAypnvzUsbGTD9Qwp8W4YTlVTz0=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-notes book-layout-">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Pointer</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p>When working with variables, we must understand first of all what is a variable. In the RAM, we got an space of, lets say for example 8 GB, this means we have a capacity to store about 8 Billions bytes, but, what would &lsquo;storing bytes&rsquo; mean? In case the ram is such as a list, when we create a variable, what we are doing is getting some free position on the ram and simply using them for that variable. Let&rsquo;s say the following C code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">50</span>] v;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>As a char in C is 1 byte, when this variable &lsquo;v&rsquo; is created, on the [[Stack|stack]] of the running program, we use get the last available position, and allocate 50 bytes, when this variable is unused, the 50 bytes are freed. So, one thing we know is that &lsquo;v&rsquo; actually lives at some position on the ram, more specifically, the stack of the current program.
+The problem is that when we try to pass variables to another place, we must do a copy. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">uintptr_t</span> v1;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">uintptr_t</span> v2;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">uintptr_t</span> v3;
+</span></span><span style="display:flex;"><span>} Ex;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(Ex val){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%p</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">&amp;</span>val);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>  Ex val <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">f</span>(val);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%p&#34;</span>, <span style="color:#f92672">&amp;</span>val);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>On running it, we can see the following:</p>
+<pre tabindex="0"><code>◄ 0s ◎ gcc ptr.c -o ptr &amp;&amp; ./ptr                   □ c/chararr ℂ v14.3.1-gcc 16:32
+0x7fff3b3ca7b0
+0x7fff3b3ca7d0
+◄ 0s ◎</code></pre><p>we can see that the positions are different, by subtracting the last 2 ones(0x7fff3b3ca7b0
+-0x7fff3b3ca7d0), we see that the difference is 32, in case, bytes, so, we can see that the value &lsquo;f&rsquo; uses is not the same value defined in main, so we can see that it is being copied before being used at &lsquo;f&rsquo;. That is the normal pattern actually, we copy stuff to pass them between functions, but it has a downside. The most obvious is supposing you have an array with 4 kilobytes, and you call functions with it directly, each function call will copy that 4 kilobytes of memory, instead, we could simply pass the position the variable lives at and then read it from there, or modify. The way we do so is through pointers. Actually that code already uses pointers. A pointer is just a variable that holds a position on the memory, it depends on the [[Architecture|architecture]], if it&rsquo;s 32 bits, we then store 32 bits for so, thus, 4 bytes, if it&rsquo;s 64 bits, we then store 64 bits for so, thus, 8 bytes.
+Understand that a pointer is not necessarily the position of a variable, but simply a position on the memory. For sure it will have problems if we use some pointers incorrectly.
+We can understand arrays as an contiguous amount of data. So, lets say:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> val[<span style="color:#ae81ff">24</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> ptr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>val;</span></span></code></pre></div><p>this will point to the first value of the array, or simply, where the array begins. We know that it&rsquo;s int, so we have allocated 96 bytes. To get the Nth number on the array where $$ 0 &lt; N &lt; 24 $$ we can do simply: <code>*(ptr + N)</code>. What happens is that, as the type is &lsquo;int&rsquo;, it&rsquo;s four bytes long, so, on pointer arithmetic, <code>ptr + 1</code> will walk exactly the amount of bytes required to go to the next value of the same size. Then, in actual bytes, <code>(ptr+1)</code> walks <code>ptr+sizeof(typeof ptr)</code>, in this case the type of the pointer is an int, then 4 bytes are walked. So <code>ptr+n</code> walks &rsquo;n&rsquo; int&rsquo;s forwards, and then the &rsquo; * &rsquo; operator says that it&rsquo;s to dereference it. Then to get the 10th element on the array we will have: <code>*(ptr + 10)</code>.
+When we want to read something from an address, we must dereference that content, thus, go to that position on the memory and read that. It&rsquo;s already said before on <code>*(ptr+N)</code>. The &rsquo; * &rsquo; operator is used to talk about these values. When reading or writing via a reference, in general this operator is used before, for example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>val;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//suppose these exist;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>b;
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">*</span>b <span style="color:#f92672">*=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Both are valid. &lsquo;a&rsquo; copies the value on &lsquo;b&rsquo;, thus, reads 50, because it points to a position on the memory which contains the int &lsquo;50&rsquo;, and <code>*b *= 4</code> on that location, we multiply the current value by 4, thus &lsquo;val&rsquo; will become &lsquo;200&rsquo; instead.
+One occasion where this happens often is with dynamic allocation. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> value <span style="color:#f92672">=</span> <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>); <span style="color:#75715e">//an array of 10 ints
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p>Here, a pointer must be returned because the value will live on the heap, and we must assign the data via dereference. This can be seen on [[Vector]], where the <code>a-&gt;b</code> is equivalent to <code>(*a).b</code> and <code>arr[n]</code> is the equivalent to <code>*(arr+n)</code>, which follows what was said about dereferences before</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+
+ 
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

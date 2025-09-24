@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="When working with trees, at some times we want to traverse it and work with the children before the parent, that method is called &lsquo;PreOrder&rsquo;. For example, on making my UI library, I had to write a way to know which element I was clicking at, for so, it was required the usage of PreOrder.
+Since the children are drawn after the parent, they&rsquo;re &lsquo;closer&rsquo; to the screen, so it makes sense for them to be checked, then, i should check for it&rsquo;s parent after checking for them, which then, configures as a PreOrder traverse.
+This can be understood better at the [[GenericTree]]. Supposing we traverse that tree using [[PosOrder]], and we print the numbers, the result would be something like 1,2,3,4,5,6,7,8,9,10, thus, we are looking for the parent then for the children, but with our case its quite the opposite, in case we wanted 10,9,8,7,6,5,4,3,2,1which will look for the children first.
+Leaving the theory, a practical code using [[Recursion]] I made is the following:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/notes/algorithms/treetraversal/preorder/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="My New Hugo Site">
+  <meta property="og:description" content="When working with trees, at some times we want to traverse it and work with the children before the parent, that method is called ‘PreOrder’. For example, on making my UI library, I had to write a way to know which element I was clicking at, for so, it was required the usage of PreOrder. Since the children are drawn after the parent, they’re ‘closer’ to the screen, so it makes sense for them to be checked, then, i should check for it’s parent after checking for them, which then, configures as a PreOrder traverse. This can be understood better at the [[GenericTree]]. Supposing we traverse that tree using [[PosOrder]], and we print the numbers, the result would be something like 1,2,3,4,5,6,7,8,9,10, thus, we are looking for the parent then for the children, but with our case its quite the opposite, in case we wanted 10,9,8,7,6,5,4,3,2,1which will look for the children first. Leaving the theory, a practical code using [[Recursion]] I made is the following:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="notes">
+<title>Pre Order | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/notes/algorithms/treetraversal/preorder/">
+<link rel="stylesheet" href="/book.min.1a2cf7ebc00040820952c4e2341e71d7d5b60d173ee3438ff388e77e880de9df.css" integrity="sha256-Giz368AAQIIJUsTiNB5x19W2DRc&#43;40OP84jnfogN6d8=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.67e33560f484200bd7322deb340ca99efcd4b1b1930fd430a7c5b86139554f3d.js" integrity="sha256-Z&#43;M1YPSEIAvXMi3rNAypnvzUsbGTD9Qwp8W4YTlVTz0=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-notes book-layout-">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Pre Order</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p>When working with trees, at some times we want to traverse it and work with the children before the parent, that method is called &lsquo;PreOrder&rsquo;. For example, on making my UI library, I had to write a way to know which element I was clicking at, for so, it was required the usage of PreOrder.
+Since the children are drawn after the parent, they&rsquo;re &lsquo;closer&rsquo; to the screen, so it makes sense for them to be checked, then, i should check for it&rsquo;s parent after checking for them, which then, configures as a PreOrder traverse.
+This can be understood better at the [[GenericTree]]. Supposing we traverse that tree using [[PosOrder]], and we print the numbers, the result would be something like <code>1,2,3,4,5,6,7,8,9,10</code>, thus, we are looking for the parent then for the children, but with our case its quite the opposite, in case we wanted <code>10,9,8,7,6,5,4,3,2,1</code>which will look for the children first.
+Leaving the theory, a practical code using [[Recursion]] I made is the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#e6db74">///Tests if the `position` is inside the bounds of some child of `element` if not, check for `element`
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span>    <span style="color:#e6db74">///This function is recursive and used to follow z-index rules.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span>    <span style="color:#e6db74">///Returns the Key of the deepest element that reaches so, if none matches, returns None
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">find_deepest_at</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&amp;</span>self,
+</span></span><span style="display:flex;"><span>        element_key: <span style="color:#a6e22e">CandyKey</span>,
+</span></span><span style="display:flex;"><span>        element: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">CandyNode</span><span style="color:#f92672">&lt;</span>P<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>        position: <span style="color:#a6e22e">Vector2</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">f32</span><span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>    ) -&gt; Option<span style="color:#f92672">&lt;</span>CandyKey<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> child <span style="color:#66d9ef">in</span> element.children() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> Some(_) <span style="color:#f92672">=</span> self.test_hit(<span style="color:#f92672">*</span>child, self.elements.get(<span style="color:#f92672">*</span>child).unwrap(), position) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> Some(<span style="color:#f92672">*</span>child);
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> bounds <span style="color:#f92672">=</span> element.bounds();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> CandyElement::Text(_) <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>element.inner {
+</span></span><span style="display:flex;"><span>            bounds.y <span style="color:#f92672">-=</span> bounds.w;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> in_bounds_of(bounds, position) {
+</span></span><span style="display:flex;"><span>            Some(element_key)
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            None
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }</span></span></code></pre></div><p>Where the function looks first for the children and then, if none return, we check for the element itself. Even though the code looks to be [[Big O Notation|O(N²)]], it is instead O(N) because it executes on every children of the given <code>element</code> exactly once
+The source code of the given function can be found [[https://github.com/cykna/candy/blob/uitree/src/ui/tree/tree.rs|here]]</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+
+ 
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
