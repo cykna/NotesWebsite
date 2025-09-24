@@ -2,112 +2,112 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/notes/algorithms/big-o-notation/</loc>
+    <loc>https://example.org/notes/algorithms/big-o-notation/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/algorithms/memoization/</loc>
+    <loc>https://example.org/notes/algorithms/memoization/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/algorithms/recursion/</loc>
+    <loc>https://example.org/notes/algorithms/recursion/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/algorithms/stackframe/</loc>
+    <loc>https://example.org/notes/algorithms/stackframe/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/algorithms/treetraversal/breadthfirst/</loc>
+    <loc>https://example.org/notes/algorithms/treetraversal/breadthfirst/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/algorithms/treetraversal/depthfirst/</loc>
+    <loc>https://example.org/notes/algorithms/treetraversal/depthfirst/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/algorithms/treetraversal/inorder/</loc>
+    <loc>https://example.org/notes/algorithms/treetraversal/inorder/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/algorithms/treetraversal/posorder/</loc>
+    <loc>https://example.org/notes/algorithms/treetraversal/posorder/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/algorithms/treetraversal/preorder/</loc>
+    <loc>https://example.org/notes/algorithms/treetraversal/preorder/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/basis/bytes/</loc>
+    <loc>https://example.org/notes/basis/bytes/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/basis/pointer/</loc>
+    <loc>https://example.org/notes/basis/pointer/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/basis/slice/</loc>
+    <loc>https://example.org/notes/basis/slice/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/concepts/ui/</loc>
+    <loc>https://example.org/notes/concepts/ui/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/concurrency/distributedlocks/</loc>
+    <loc>https://example.org/notes/concurrency/distributedlocks/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/datastructures/linkedlist/</loc>
+    <loc>https://example.org/notes/datastructures/linkedlist/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/datastructures/slotmap/</loc>
+    <loc>https://example.org/notes/datastructures/slotmap/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/datastructures/trees/</loc>
+    <loc>https://example.org/notes/datastructures/trees/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/datastructures/vector/</loc>
+    <loc>https://example.org/notes/datastructures/vector/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/datatransfer/batching/</loc>
+    <loc>https://example.org/notes/datatransfer/batching/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/datatransfer/streamming/</loc>
+    <loc>https://example.org/notes/datatransfer/streamming/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/errors/stackoverflow/</loc>
+    <loc>https://example.org/notes/errors/stackoverflow/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/excalidraw/generictree/</loc>
+    <loc>https://example.org/notes/excalidraw/generictree/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/io/streams/</loc>
+    <loc>https://example.org/notes/io/streams/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/protocols/matp/</loc>
+    <loc>https://example.org/notes/protocols/matp/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/protocols/protocol/</loc>
+    <loc>https://example.org/notes/protocols/protocol/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/protocols/web/http/</loc>
+    <loc>https://example.org/notes/protocols/web/http/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/protocols/web/ip/</loc>
+    <loc>https://example.org/notes/protocols/web/ip/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/protocols/web/quic/</loc>
+    <loc>https://example.org/notes/protocols/web/quic/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/protocols/web/tcp/</loc>
+    <loc>https://example.org/notes/protocols/web/tcp/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/protocols/web/udp/</loc>
+    <loc>https://example.org/notes/protocols/web/udp/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/readme/</loc>
+    <loc>https://example.org/notes/readme/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/strings/encodings/base64/</loc>
+    <loc>https://example.org/notes/strings/encodings/base64/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/strings/encodings/base65536/</loc>
+    <loc>https://example.org/notes/strings/encodings/base65536/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/strings/encodings/utf16/</loc>
+    <loc>https://example.org/notes/strings/encodings/utf16/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/strings/encodings/utf8/</loc>
+    <loc>https://example.org/notes/strings/encodings/utf8/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/strings/null-character/</loc>
+    <loc>https://example.org/notes/strings/null-character/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/clientserver/</loc>
+    <loc>https://example.org/notes/web/clientserver/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/dsl/</loc>
+    <loc>https://example.org/notes/web/dsl/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/isp/</loc>
+    <loc>https://example.org/notes/web/isp/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/lan/</loc>
+    <loc>https://example.org/notes/web/lan/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/nuts-and-bolts/</loc>
+    <loc>https://example.org/notes/web/nuts-and-bolts/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/osi/</loc>
+    <loc>https://example.org/notes/web/osi/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/serverclient/client-server-introduction/</loc>
+    <loc>https://example.org/notes/web/serverclient/client-server-introduction/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/serverclient/client/</loc>
+    <loc>https://example.org/notes/web/serverclient/client/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/serverclient/server/</loc>
+    <loc>https://example.org/notes/web/serverclient/server/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/serverclient/tcpclient/</loc>
+    <loc>https://example.org/notes/web/serverclient/tcpclient/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/serverclient/udpclient/</loc>
+    <loc>https://example.org/notes/web/serverclient/udpclient/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/sockets/</loc>
+    <loc>https://example.org/notes/web/sockets/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/web/wifi/</loc>
+    <loc>https://example.org/notes/web/wifi/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://example.org/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/excalidraw/</loc>
+    <loc>https://example.org/tags/excalidraw/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://example.org/</loc>
   </url><url>
-    <loc>http://localhost:1313/notes/</loc>
+    <loc>https://example.org/notes/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://example.org/tags/</loc>
   </url>
 </urlset>

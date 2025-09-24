@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -13,7 +13,7 @@ Based on that, if I have a tree that is vector based, the time for deletion will
 Slotmaps are just as vectors, but they simply keep the gap of where should be removed and reinsert a new element there instead of in the back or the head of a Vector or a Queue. The core idea can be understood as the following:">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/notes/datastructures/slotmap/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://example.org/notes/datastructures/slotmap/">
   <meta property="og:site_name" content="My New Hugo Site">
   <meta property="og:title" content="My New Hugo Site">
   <meta property="og:description" content="When building a tree, if trying to make it Vector based, one of the problems it will have is that the deletion at some index I is not O(1), instead O(N), that does happen because when the data is deleted, a gap originates, but, the must vector to be contiguous and able to accessed via indices correctly, so the content to the right of I($\forall N \text{ where } I &lt; N &lt; Len$) , needs to be moved to the left, then, the cost to make so is defined as O(N). The reasons why this can be understood on [[Big O Notation]] Based on that, if I have a tree that is vector based, the time for deletion will be slow as hell, then another kind of data structure must be required, some that makes able to work with deletion and insertion at O(1). We do can work with [[LinkedList|linked lists]] but it would be O(n) to search for elements. Then the solution is a data structure that contains info about a given type T in a contiguous way, when deleting keeps that gap and reuses, and can be fast for finding. Well, that’s the case of a Slotmap. Slotmaps are just as vectors, but they simply keep the gap of where should be removed and reinsert a new element there instead of in the back or the head of a Vector or a Queue. The core idea can be understood as the following:">
@@ -23,7 +23,7 @@ Slotmaps are just as vectors, but they simply keep the gap of where should be re
 <title>Slot Map | My New Hugo Site</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/notes/datastructures/slotmap/">
+<link rel="canonical" href="https://example.org/notes/datastructures/slotmap/">
 <link rel="stylesheet" href="/book.min.1a2cf7ebc00040820952c4e2341e71d7d5b60d173ee3438ff388e77e880de9df.css" integrity="sha256-Giz368AAQIIJUsTiNB5x19W2DRc&#43;40OP84jnfogN6d8=" crossorigin="anonymous">
 
 
