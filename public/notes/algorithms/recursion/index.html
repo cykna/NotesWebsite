@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Recursion is occurs when a something uses itself on its definition, for example, with mathematical functions:
+$f(x) = 1 &#43; f(x-1)$
+This function f, on it&rsquo;s definition, calls itself, then, it&rsquo;s considered a recursive function. That can be written in it&rsquo;s code format with the following:
+fn f(n:i32) -&gt; i32{
+	1 &#43; f(n-1)
+}But recursion can appear in other situations than simply function calls, for example, let&rsquo;s say the following rule:
+$$0 \in N$$ $$\forall n \in N, n&#43;1 \in N$$
+Then, this rule is recursive as well, because it uses itself to determine that $n \in N$ .
+Going back to programming, one kind of data structure that is recursive are [[LinkedList|linked lists]] and [[Trees|trees]], for example:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/notes/algorithms/recursion/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="My New Hugo Site">
+  <meta property="og:description" content="Recursion is occurs when a something uses itself on its definition, for example, with mathematical functions: $f(x) = 1 &#43; f(x-1)$ This function f, on it’s definition, calls itself, then, it’s considered a recursive function. That can be written in it’s code format with the following:
+fn f(n:i32) -&gt; i32{ 1 &#43; f(n-1) }But recursion can appear in other situations than simply function calls, for example, let’s say the following rule: $$0 \in N$$ $$\forall n \in N, n&#43;1 \in N$$ Then, this rule is recursive as well, because it uses itself to determine that $n \in N$ . Going back to programming, one kind of data structure that is recursive are [[LinkedList|linked lists]] and [[Trees|trees]], for example:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="notes">
+<title>Recursion | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/notes/algorithms/recursion/">
+<link rel="stylesheet" href="/book.min.1a2cf7ebc00040820952c4e2341e71d7d5b60d173ee3438ff388e77e880de9df.css" integrity="sha256-Giz368AAQIIJUsTiNB5x19W2DRc&#43;40OP84jnfogN6d8=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.67e33560f484200bd7322deb340ca99efcd4b1b1930fd430a7c5b86139554f3d.js" integrity="sha256-Z&#43;M1YPSEIAvXMi3rNAypnvzUsbGTD9Qwp8W4YTlVTz0=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-notes book-layout-">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Recursion</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#usages">Usages</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p>Recursion is occurs when a something uses itself on its definition, for example, with mathematical functions:
+$f(x) = 1 + f(x-1)$
+This function f, on it&rsquo;s definition, calls itself, then, it&rsquo;s considered a recursive function. That can be written in it&rsquo;s code format with the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">f</span>(n:<span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> f(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>But recursion can appear in other situations than simply function calls, for example, let&rsquo;s say the following rule:
+$$0 \in N$$ $$\forall n \in N, n+1 \in N$$
+Then, this rule is recursive as well, because it uses itself to determine that $n \in N$ .
+Going back to programming, one kind of data structure that is recursive are [[LinkedList|linked lists]] and [[Trees|trees]], for example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">LinkedList</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>	next: <span style="color:#a6e22e">LinkedList</span>,
+</span></span><span style="display:flex;"><span>	value: <span style="color:#a6e22e">T</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>This struct has as some of its fields, itself, being obligatory to it exists. That leads us to that, when creating, we need to create an infinite amount of linked lists, which would require as well, infinite ram. So, one of the problems of recursion in general is that we MUST have some way to determine where to end, because if not, the task won&rsquo;t finish. That condition is called Base case, which is some scenario that will not use recursion to produce some value, then, when reached, will stop the execution.
+It can be understood with the way we define $N!$, it can be defined as
+$$N! =
+\begin{cases}{1, \text{ if } N = 0 \[4pt]
+N \cdot (N-1)!, \text{ if } N &gt; 0}\end{cases}$$ Then we can write this function with rust the following way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fac</span>(n:<span style="color:#66d9ef">u32</span>) -&gt; <span style="color:#66d9ef">u32</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span><span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	}<span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>		n <span style="color:#f92672">*</span> fac(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>For the linked list struct, a solution is that, a Node that doesn&rsquo;t point to another Node, so, the structure would be</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">LinkedList</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>	next: Option<span style="color:#f92672">&lt;</span>Box<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&gt;&gt;</span>,
+</span></span><span style="display:flex;"><span>	value: <span style="color:#a6e22e">T</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The reason why a [[Pointer]] is used it&rsquo;s because its size on the memory is <code>usize</code>, so when compiling the code, the compiler knows how many [[Bytes]] to allocate. If not, we would end up with the same recursion problem of infinite memory being required.</p>
+<h2 id="usages">Usages
+  <a class="anchor" href="#usages">#</a></h2>
+<p>When working with recursive data structures, we can do use recursion as a way to iterating over it, but depending on the way it&rsquo;s executed, it might not be as fast as some non-recursive formula and or iterations. The thing is that due to it&rsquo;s nature, recursion is almost never [[Big O Notation|O(1)]], so, for example, Fibonnaci, it can be written in rust with the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fib_naive</span>(n: <span style="color:#66d9ef">u64</span>) -&gt; <span style="color:#66d9ef">u64</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">match</span> n {
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">1</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        _ <span style="color:#f92672">=&gt;</span> fib_naive(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib_naive(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}<span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>Which will lead us to an <span style="color:#e6db74">&#34;exponential&#34;</span> growth.
+</span></span><span style="display:flex;"><span>When we run the following code:
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>rust
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fib_naive</span>(n: <span style="color:#66d9ef">u64</span>, inc: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> <span style="color:#66d9ef">usize</span>) -&gt; <span style="color:#66d9ef">u64</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>inc <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">match</span> n {
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">1</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        _ <span style="color:#f92672">=&gt;</span> fib_naive(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, inc) <span style="color:#f92672">+</span> fib_naive(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>, inc),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    fib_naive(<span style="color:#ae81ff">20</span>, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> index);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;Fib naive executed </span><span style="color:#e6db74">{index}</span><span style="color:#e6db74"> times&#34;</span>);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>we have that, on finalizing, we will have the following output:</p>
+<pre tabindex="0"><code>cargo run    
+   Compiling fib v0.1.0 (~/programming/notes/fib)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.29s
+     Running `target/debug/fib`
+Fib naive executed 21891 times</code></pre><p>which is terrible(obs: both on optimized and unoptimized versions of the code, rust still executes the same amount of 21891 function calls).  Since each function call generates a new [[StackFrame|stack frame]], we are creating about 22.000 stack frames,  which then can lead us to some [[StackOverflow|stack overflow]] error. So, we can have some ways to make it better, one of the ways is by [[Memoization|memoizing]] the data to don&rsquo;t call it over and over again to recompute the same values, but, let&rsquo;s focus on the most performant options, which would be O(1).
+If we look up on some equivalents for the Fibonnaci series, we find the following formula which uses Golden Ratio to calculate it:
+$$L(N) = (\frac{(1+\sqrt5}2)^N + (\frac{1-\sqrt5}2)^N $$
+Which can be written in rust as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fib</span>(n:<span style="color:#66d9ef">u64</span>) -&gt; <span style="color:#66d9ef">u64</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">RATIO</span> <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> (<span style="color:#ae81ff">5.0</span>).sqrt()) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">NEG_RATIO</span> <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> (<span style="color:#ae81ff">5.0</span>).sqrt()) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">let</span> n <span style="color:#f92672">=</span> n <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">f64</span>;
+</span></span><span style="display:flex;"><span>	(<span style="color:#66d9ef">RATIO</span>.powf(n) <span style="color:#f92672">+</span> <span style="color:#66d9ef">NEG_RATIO</span>.powf(n)) <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">u64</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Now, we specify a constant amount of instructions to do, which does categorize this implementation as O(1). Note that the <code>const</code> values are created once during compile time.
+Todo: More examples of recursion, such as trees</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+
+ 
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+
+<aside class="book-toc">
+  <div class="book-toc-content">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#usages">Usages</a></li>
+  </ul>
+</nav>
+
+
+
+  </div>
+</aside>
+
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

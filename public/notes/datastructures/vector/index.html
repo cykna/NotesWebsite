@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="When working with data, one thing that we might want to do is have a list of elements, independently of the way it&rsquo;s structured, we want to have elements on a list. The first thing we can think of is using an [[Array]] but, if the content size is not known during runtime, we cannot simply store it on a array, since, they got fixed size.
+To manipulate something like this then, we must allocate data during runtime, thus, we think firstly on rely on top of things like [[Heap|heap]] allocation. That&rsquo;s exactly the way Vectors work.
+Vectors are dynamic sized arrays, then, it&rsquo;s correct to assume that they do allocate things on heap, more precisely, they pre-allocate an specific amount of bytes required to start working.
+Let&rsquo;s say the following:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/notes/datastructures/vector/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="My New Hugo Site">
+  <meta property="og:description" content="When working with data, one thing that we might want to do is have a list of elements, independently of the way it’s structured, we want to have elements on a list. The first thing we can think of is using an [[Array]] but, if the content size is not known during runtime, we cannot simply store it on a array, since, they got fixed size. To manipulate something like this then, we must allocate data during runtime, thus, we think firstly on rely on top of things like [[Heap|heap]] allocation. That’s exactly the way Vectors work. Vectors are dynamic sized arrays, then, it’s correct to assume that they do allocate things on heap, more precisely, they pre-allocate an specific amount of bytes required to start working. Let’s say the following:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="notes">
+<title>Vector | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/notes/datastructures/vector/">
+<link rel="stylesheet" href="/book.min.1a2cf7ebc00040820952c4e2341e71d7d5b60d173ee3438ff388e77e880de9df.css" integrity="sha256-Giz368AAQIIJUsTiNB5x19W2DRc&#43;40OP84jnfogN6d8=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.67e33560f484200bd7322deb340ca99efcd4b1b1930fd430a7c5b86139554f3d.js" integrity="sha256-Z&#43;M1YPSEIAvXMi3rNAypnvzUsbGTD9Qwp8W4YTlVTz0=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-notes book-layout-">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Vector</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p>When working with data, one thing that we might want to do is have a list of elements, independently of the way it&rsquo;s structured, we want to have elements on a list. The first thing we can think of is using an [[Array]] but, if the content size is not known during runtime, we cannot simply store it on a array, since, they got fixed size.
+To manipulate something like this then, we must allocate data during runtime, thus, we think firstly on rely on top of things like [[Heap|heap]] allocation. That&rsquo;s exactly the way Vectors work.
+Vectors are dynamic sized arrays, then, it&rsquo;s correct to assume that they do allocate things on heap, more precisely, they pre-allocate an specific amount of bytes required to start working.
+Let&rsquo;s say the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> vec <span style="color:#f92672">=</span> Vec::with_capacity(<span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>	vec.push(<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>	vec.push(<span style="color:#ae81ff">40</span>);
+</span></span><span style="display:flex;"><span>	vec.push(<span style="color:#ae81ff">60</span>);
+</span></span><span style="display:flex;"><span>	vec.push(<span style="color:#ae81ff">80</span>);	
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>In rust and in others languages, the method push is used to append the data at the end of the inner array. It can be understood in C, like the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> vec <span style="color:#f92672">=</span> <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	vec[len<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>	vec[len<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>;
+</span></span><span style="display:flex;"><span>	vec[len<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span>;
+</span></span><span style="display:flex;"><span>	vec[len<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The thing is that when the content pushed tries to overflow, which is categorized by, trying to add an element when the array is fulfilled, we before pushing it at the end, we allocate more memory for the array so we can safely insert it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdint.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> IntVec {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">uintptr_t</span> len;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">uintptr_t</span> cap;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> array;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> IntVec <span style="color:#a6e22e">createWithCapacity</span>(<span style="color:#66d9ef">int</span> capacity) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">struct</span> IntVec out;
+</span></span><span style="display:flex;"><span>  out.cap <span style="color:#f92672">=</span> capacity;
+</span></span><span style="display:flex;"><span>  out.len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  out.array <span style="color:#f92672">=</span> <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span> capacity);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> out;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">grow</span>(<span style="color:#66d9ef">struct</span> IntVec<span style="color:#f92672">*</span> vec) {
+</span></span><span style="display:flex;"><span>  vec<span style="color:#f92672">-&gt;</span>array <span style="color:#f92672">=</span> <span style="color:#a6e22e">realloc</span>(vec<span style="color:#f92672">-&gt;</span>array, vec<span style="color:#f92672">-&gt;</span>cap <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>  vec<span style="color:#f92672">-&gt;</span>cap <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">struct</span> IntVec<span style="color:#f92672">*</span> vec, <span style="color:#66d9ef">int</span> data) {
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span>(vec<span style="color:#f92672">-&gt;</span>len <span style="color:#f92672">==</span> vec<span style="color:#f92672">-&gt;</span>cap) <span style="color:#a6e22e">grow</span>(vec);
+</span></span><span style="display:flex;"><span>  vec<span style="color:#f92672">-&gt;</span>array[vec<span style="color:#f92672">-&gt;</span>len<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> data;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">struct</span> IntVec vec <span style="color:#f92672">=</span> <span style="color:#a6e22e">createWithCapacity</span>(<span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">push</span>(<span style="color:#f92672">&amp;</span>vec, <span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">push</span>(<span style="color:#f92672">&amp;</span>vec, <span style="color:#ae81ff">24</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">push</span>(<span style="color:#f92672">&amp;</span>vec, <span style="color:#ae81ff">29</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">push</span>(<span style="color:#f92672">&amp;</span>vec, <span style="color:#ae81ff">24</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">push</span>(<span style="color:#f92672">&amp;</span>vec, <span style="color:#ae81ff">28</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> vec.len; i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, vec.array[i]);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The example code above exemplifies at a basic level a vector and how it simply reallocates memory to support more data. The implementation if a Vector in rust doubles the capacity, but it&rsquo;s not necessarily all the vectors apply this rule of doubling the capacity on their implementations.
+For that reason, a vector insertion at any index, as well as finding a content at any index, is [[Big O Notation|O(1)]], as long as the write overwrites the content.
+For example <code>vec-&gt;array[5] = 10;</code> is O(1), but the desired is to insert 10 at index 5, and what is after it, increases the index, thus, moving it to the right, the operation is now O(N) where $N = Len(arr) - idx$.
+This is also a way of insertion, but it supposes you shift the content, the insertion where it&rsquo;s O(n) can be called &lsquo;overwrite&rsquo;, because you literally are writing data there. To make things easier to understand, the term &lsquo;insert&rsquo; will be used to talk about this kind of insertion where the content after is shifted to the right, and the one that simply writes data will be called &lsquo;overwriting&rsquo;
+To implement it we must first understand how do we do the moving of the elements. We know that on an array [5,4,3,2], if we insert 8, at the index 2, it will then become [5,4,8,3,2].
+To begin with, let&rsquo;s start with the function definition</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insert</span>(<span style="color:#66d9ef">struct</span> IntVec<span style="color:#f92672">*</span> target, <span style="color:#66d9ef">int</span> index, <span style="color:#66d9ef">int</span> value) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//here, for all values with index I, where I &gt;= param(index), overwrite them at I+1 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div><p>So first let&rsquo;s start with the moving. As we will move data to <code>I+1</code> where I = current index, if the content vector doesn&rsquo;t have size enough, it will overflow, so we MUST ensure the vector has capacity for so.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insert</span>(<span style="color:#66d9ef">struct</span> IntVec<span style="color:#f92672">*</span> vec, <span style="color:#66d9ef">int</span> index, <span style="color:#66d9ef">int</span> data) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span>(vec<span style="color:#f92672">-&gt;</span>len <span style="color:#f92672">==</span> vec<span style="color:#f92672">-&gt;</span>cap) <span style="color:#a6e22e">grow</span>(vec);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> modifier_index <span style="color:#f92672">=</span> vec<span style="color:#f92672">-&gt;</span>len;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span>(modifier_index <span style="color:#f92672">&gt;</span> index) {
+</span></span><span style="display:flex;"><span>    vec<span style="color:#f92672">-&gt;</span>array[modifier_index] <span style="color:#f92672">=</span> vec<span style="color:#f92672">-&gt;</span>array[modifier_index<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    modifier_index<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  vec<span style="color:#f92672">-&gt;</span>array[index] <span style="color:#f92672">=</span> data;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>And there it is, now the content is moved and the value is correctly inserted.
+As you probably noticed, we must start with values at the length of the vector, because <code>length == last_pos+1</code>, due to pointer arithmetic. Then, we move the values from N-1 to N, which is shifting them to the right. And at the index we overwrite with the content we want.
+The downside of using this insert method, is that for big amount of data, it will be slow, so other options must be used instead. For example, if we want some kind of [[Queue|queue]], we could use this as well, but inserting always at index 0, the problem with that is that for each insertion we would have to move things.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+
+ 
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
