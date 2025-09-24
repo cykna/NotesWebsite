@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Packet-switches and Communication-links
+  #
+On the web, the way for sending bits from one computer to another, are made with packet-switches and communication-links, where, the communication-link is the way the data will be transferred. If the data is being sent via Wifi, then the communication-link is radio-waves. If it&rsquo;s being sent via cables, the cable itself is the communication-link.
+When talking about the packet-switches, understanding what is a packet is crucial, but not too hard. When a content is sent, normally it&rsquo;s not sent fully and once, actually, it is sent [[Streamming|streamed]], thus, each piece of the content sent, is considered a packet. What actually happens is that this little piece will get it&rsquo;s header written by the packet-switch, then, the one that did so, will try to send it to the target computer, but, if the computer is not on the current [[LAN]] then it sends the data again to another packet-switch, that then does the same.
+Some examples of packet-switches are routers, that are defined on the Layer 3 of [[OSI|OSI model]] and Ethernet switches">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/notes/web/nuts-and-bolts/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="My New Hugo Site">
+  <meta property="og:description" content="Packet-switches and Communication-links # On the web, the way for sending bits from one computer to another, are made with packet-switches and communication-links, where, the communication-link is the way the data will be transferred. If the data is being sent via Wifi, then the communication-link is radio-waves. If it’s being sent via cables, the cable itself is the communication-link. When talking about the packet-switches, understanding what is a packet is crucial, but not too hard. When a content is sent, normally it’s not sent fully and once, actually, it is sent [[Streamming|streamed]], thus, each piece of the content sent, is considered a packet. What actually happens is that this little piece will get it’s header written by the packet-switch, then, the one that did so, will try to send it to the target computer, but, if the computer is not on the current [[LAN]] then it sends the data again to another packet-switch, that then does the same. Some examples of packet-switches are routers, that are defined on the Layer 3 of [[OSI|OSI model]] and Ethernet switches">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="notes">
+<title>Nuts and Bolts | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/notes/web/nuts-and-bolts/">
+<link rel="stylesheet" href="/book.min.1a2cf7ebc00040820952c4e2341e71d7d5b60d173ee3438ff388e77e880de9df.css" integrity="sha256-Giz368AAQIIJUsTiNB5x19W2DRc&#43;40OP84jnfogN6d8=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.67e33560f484200bd7322deb340ca99efcd4b1b1930fd430a7c5b86139554f3d.js" integrity="sha256-Z&#43;M1YPSEIAvXMi3rNAypnvzUsbGTD9Qwp8W4YTlVTz0=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-notes book-layout-">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Nuts and Bolts</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#packet-switches-and-communication-links">Packet-switches and Communication-links</a></li>
+    <li><a href="#how-its-sent">How it&rsquo;s sent</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="packet-switches-and-communication-links">Packet-switches and Communication-links
+  <a class="anchor" href="#packet-switches-and-communication-links">#</a></h2>
+<p>On the web, the way for sending bits from one computer to another, are made with packet-switches and communication-links, where, the communication-link is the way the data will be transferred. If the data is being sent via Wifi, then the communication-link is radio-waves. If it&rsquo;s being sent via cables, the cable itself is the communication-link.
+When talking about the packet-switches, understanding what is a packet is crucial, but not too hard. When a content is sent, normally it&rsquo;s not sent fully and once, actually, it is sent [[Streamming|streamed]], thus, each piece of the content sent, is considered a packet. What actually happens is that this little piece will get it&rsquo;s header written by the packet-switch, then, the one that did so, will try to send it to the target computer, but, if the computer is not on the current [[LAN]] then it sends the data again to another packet-switch, that then does the same.
+Some examples of packet-switches are routers, that are defined on the Layer 3 of [[OSI|OSI model]] and Ethernet switches</p>
+<h2 id="how-its-sent">How it&rsquo;s sent
+  <a class="anchor" href="#how-its-sent">#</a></h2>
+<p>When sending the data from one computer to another, it&rsquo;s important that it&rsquo;s sent a way that is readable, that&rsquo;s why protocols exist, they define how things should be to work. When talking about some of the [[Protocol|protocols]] used to send data, 2 are the major ones: [[TCP]] and [[IP]]. Actually, when an End system, for example some [[ClientServer|Client or Server]], wants to transfer some data, it uses a socket interface, that specifies how this end asks the Internet infrastructure to deliver the data to the correct destination. In fact, the way it&rsquo;s sent is determined by a protocol, where, the other end expects that the receiver is listening with the same protocol. For example, a [[TCPClient|tcp client]] will expect that the listener will be running on [[TCP]] to understand that data correctly . In fact, there are a lot of protocols in the web. A good book that covers a lot of topics about it is: Computer Networking a Top Down Approach.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+
+ 
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+
+<aside class="book-toc">
+  <div class="book-toc-content">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#packet-switches-and-communication-links">Packet-switches and Communication-links</a></li>
+    <li><a href="#how-its-sent">How it&rsquo;s sent</a></li>
+  </ul>
+</nav>
+
+
+
+  </div>
+</aside>
+
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
